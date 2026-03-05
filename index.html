@@ -1,270 +1,616 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hrithik Vasanthram - Portfolio</title>
-  <link rel="shortcut icon" href="./assets/images/logoH.png">
-  <link rel="stylesheet" href="./assets/css/style.css">
+  <meta name="description"
+    content="Hrithik Vasanthram — Full-Stack Developer & UI/UX Designer. Building modern, scalable web experiences with MERN stack, AI integrations, and clean design.">
+  <meta name="keywords" content="Hrithik Vasanthram, Full-Stack Developer, UI/UX Designer, MERN Stack, Portfolio">
+  <meta name="author" content="Hrithik Vasanthram">
+  <meta name="theme-color" content="#f8f9ff">
+  <meta property="og:title" content="Hrithik Vasanthram — Portfolio">
+  <meta property="og:description"
+    content="Full-Stack Developer & UI/UX Designer crafting enterprise-grade digital experiences.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="./assets/images/my-avatar.jpg">
+  <title>Hrithik Vasanthram — Portfolio</title>
+  <link rel="shortcut icon" href="./assets/images/Hrithik-Logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
-<main>
-<aside class="sidebar" data-sidebar>
-  <div class="sidebar-info">
-    <figure class="avatar-box">
-      <img src="./assets/images/my-avatar.jpg" alt="Hrithik Vasanthram" width="80">
-    </figure>
-    <div class="info-content">
-      <h1 class="name">Hrithik Vasanthram</h1>
-      <p class="title">Web developer</p>
+  <!-- ═══════════ PRELOADER ═══════════ -->
+  <div id="preloader" class="preloader">
+    <div class="preloader-inner">
+      <div class="preloader-cube">
+        <div class="cube-face cube-front"></div>
+        <div class="cube-face cube-back"></div>
+        <div class="cube-face cube-left"></div>
+        <div class="cube-face cube-right"></div>
+        <div class="cube-face cube-top"></div>
+        <div class="cube-face cube-bottom"></div>
+      </div>
+      <p class="preloader-text">Loading Experience<span class="dot-anim">...</span></p>
     </div>
-    <button class="info_more-btn" data-sidebar-btn>
-      <span>Show Contacts</span>
-      <ion-icon name="chevron-down"></ion-icon>
-    </button>
   </div>
 
-  <div class="sidebar-info_more">
-    <div class="separator"></div>
+  <!-- ═══════════ CURSOR ═══════════ -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
 
-    <ul class="contacts-list">
-      <li class="contact-item">
-        <div class="icon-box"><ion-icon name="mail-outline"></ion-icon></div>
-        <div class="contact-info">
-          <p class="contact-title">Email</p>
-          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=hrithikvasanthram@gmail.com" class="contact-link">hrithikvasanthram@gmail.com</a>
-        </div>
-      </li>
-      <li class="contact-item">
-        <div class="icon-box"><ion-icon name="calendar-outline"></ion-icon></div>
-        <div class="contact-info">
-          <p class="contact-title">Birthday</p>
-          <time datetime="2006-09-18">Sep 18, 2006</time>
-        </div>
-      </li>
+  <!-- ═══════════ PARTICLES CANVAS ═══════════ -->
+  <canvas id="particleCanvas"></canvas>
 
-      <li class="contact-item">
-        <div class="icon-box"><ion-icon name="location-outline"></ion-icon></div>
-        <div class="contact-info">
-          <p class="contact-title">Location</p>
-          <address>Madurai, Tamil Nadu, India</address>
-        </div>
-      </li>
-    </ul>
-
-    <div class="separator"></div>
-
-    <ul class="social-list">
-      <li class="social-item">
-        <a href="https://github.com/hrithik18k" class="social-link"><ion-icon name="logo-github"></ion-icon></a>
-      </li>
-      <li class="social-item">
-        <a href="https://linkedin.com/in/hrithik18k" class="social-link"><ion-icon name="logo-linkedin"></ion-icon></a>
-      </li>
-      <li class="social-item">
-        <a href="https://leetcode.com/hrithik18k" class="social-link">
-          <img src="./assets/images/logo-leetcode.webp" alt="LeetCode" class="social-icon">
+  <!-- ═══════════ NAVIGATION ═══════════ -->
+  <nav class="nav-main" id="navMain">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">
+        <img src="./assets/images/Hrithik-Logo.png" alt="H" class="nav-logo-img">
+        <span class="nav-logo-text">Hrithik<span class="accent">.</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero" class="nav-link active" data-section="hero">Home</a></li>
+        <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+        <li><a href="#skills" class="nav-link" data-section="skills">Skills</a></li>
+        <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
+        <li><a href="#resume" class="nav-link" data-section="resume">Resume</a></li>
+        <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <ion-icon name="sunny-outline" class="theme-icon"></ion-icon>
+        </button>
+        <a href="./assets/HrithikVasanthram(final).docx.pdf" download class="nav-cta">
+          <span>Resume</span>
+          <ion-icon name="download-outline"></ion-icon>
         </a>
-      </li>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══════════ MOBILE MENU ═══════════ -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-nav-links">
+      <li><a href="#hero" class="mobile-nav-link" data-section="hero">Home</a></li>
+      <li><a href="#about" class="mobile-nav-link" data-section="about">About</a></li>
+      <li><a href="#skills" class="mobile-nav-link" data-section="skills">Skills</a></li>
+      <li><a href="#projects" class="mobile-nav-link" data-section="projects">Projects</a></li>
+      <li><a href="#resume" class="mobile-nav-link" data-section="resume">Resume</a></li>
+      <li><a href="#contact" class="mobile-nav-link" data-section="contact">Contact</a></li>
     </ul>
   </div>
-</aside>
 
-<div class="main-content">
-<nav class="navbar">
-  <ul class="navbar-list">
-    <li class="navbar-item"><button class="navbar-link active" data-nav-link>About</button></li>
-    <li class="navbar-item"><button class="navbar-link" data-nav-link>Resume</button></li>
-    <li class="navbar-item"><button class="navbar-link" data-nav-link>Portfolio</button></li>
-    <li class="navbar-item"><button class="navbar-link" data-nav-link>Contact</button></li>
-  </ul>
-</nav>
-
-<article class="about active" data-page="about">
-  <header><h2 class="h2 article-title">About me</h2></header>
-  <section class="about-text">
-    <p>I'm a Full-Stack Developer and UI/UX Designer from India who loves creating clean, modern, and user-friendly digital experiences. I build MERN stack applications that blend intuitive design with strong backend architecture.</p>
-    <p>I enjoy turning real-world problems into simple, effective solutions—whether through smooth interfaces, scalable systems, or smart AI integrations.</p>
-    <p>My mission is to turn ideas into visually engaging, high-quality digital experiences that people truly enjoy using.</p>
-  </section>
-
-  <section class="service">
-    <h3 class="h3 service-title">What I'm doing</h3>
-    <ul class="service-list">
-      <li class="service-item">
-        <div class="service-icon-box"><img src="./assets/images/icon-design.svg" width="40"></div>
-        <div class="service-content-box">
-          <h4 class="h4 service-item-title">Web design</h4>
-          <p class="service-item-text">Modern and high-quality design.</p>
+  <main>
+    <!-- ═══════════ HERO SECTION ═══════════ -->
+    <section id="hero" class="section hero-section">
+      <div class="hero-container">
+        <div class="hero-content">
+          <div class="hero-badge" data-reveal="left">
+            <span class="badge-dot"></span>
+            <span>Available for opportunities</span>
+          </div>
+          <h1 class="hero-title" data-reveal="up">
+            <span class="hero-greeting">Hello, I'm</span>
+            <span class="hero-name">Hrithik <span class="gradient-text">Vasanthram</span></span>
+            <span class="hero-role" id="typedRole"></span>
+          </h1>
+          <p class="hero-description" data-reveal="up" data-delay="200">
+            I craft <strong>enterprise-grade</strong> digital experiences that merge stunning design
+            with robust architecture. Specializing in MERN stack, AI integrations, and
+            scalable solutions that push boundaries.
+          </p>
+          <div class="hero-actions" data-reveal="up" data-delay="400">
+            <a href="#projects" class="btn btn-primary">
+              <span>View My Work</span>
+              <ion-icon name="arrow-forward-outline"></ion-icon>
+            </a>
+            <a href="#contact" class="btn btn-outline">
+              <span>Let's Talk</span>
+              <ion-icon name="chatbubble-outline"></ion-icon>
+            </a>
+          </div>
+          <div class="hero-stats" data-reveal="up" data-delay="600">
+            <div class="stat-item">
+              <span class="stat-number" data-count="10">0</span><span class="stat-suffix">+</span>
+              <span class="stat-label">Projects</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-number" data-count="5">0</span><span class="stat-suffix">+</span>
+              <span class="stat-label">Technologies</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-number" data-count="2">0</span><span class="stat-suffix">+</span>
+              <span class="stat-label">Years Learning</span>
+            </div>
+          </div>
         </div>
-      </li>
-
-      <li class="service-item">
-        <div class="service-icon-box"><img src="./assets/images/icon-dev.svg" width="40"></div>
-        <div class="service-content-box">
-          <h4 class="h4 service-item-title">Web development</h4>
-          <p class="service-item-text">High-quality development at a professional level.</p>
+        <div class="hero-visual" data-reveal="right">
+          <div class="hero-avatar-wrapper">
+            <div class="avatar-glow"></div>
+            <div class="avatar-ring avatar-ring-1"></div>
+            <div class="avatar-ring avatar-ring-2"></div>
+            <div class="avatar-ring avatar-ring-3"></div>
+            <div class="hero-avatar-card">
+              <img src="./assets/images/my-avatar.jpg" alt="Hrithik Vasanthram" class="hero-avatar-img">
+            </div>
+            <div class="floating-tech floating-tech-1" data-tilt>
+              <ion-icon name="logo-react"></ion-icon>
+            </div>
+            <div class="floating-tech floating-tech-2" data-tilt>
+              <ion-icon name="logo-nodejs"></ion-icon>
+            </div>
+            <div class="floating-tech floating-tech-3" data-tilt>
+              <ion-icon name="logo-javascript"></ion-icon>
+            </div>
+            <div class="floating-tech floating-tech-4" data-tilt>
+              <ion-icon name="logo-python"></ion-icon>
+            </div>
+          </div>
         </div>
-      </li>
-
-      <li class="service-item">
-        <div class="service-icon-box"><img src="./assets/images/icon-app.svg" width="40"></div>
-        <div class="service-content-box">
-          <h4 class="h4 service-item-title">Mobile apps</h4>
-          <p class="service-item-text">Professional iOS and Android development.</p>
+      </div>
+      <div class="scroll-indicator" data-reveal="up" data-delay="800">
+        <div class="mouse">
+          <div class="mouse-wheel"></div>
         </div>
-      </li>
+        <span>Scroll to explore</span>
+      </div>
+    </section>
 
-      <li class="service-item">
-        <div class="service-icon-box"><img src="./assets/images/icon-photo.svg" width="40"></div>
-        <div class="service-content-box">
-          <h4 class="h4 service-item-title">Photography</h4>
-          <p class="service-item-text">High-quality photography.</p>
+    <!-- ═══════════ ABOUT SECTION ═══════════ -->
+    <section id="about" class="section about-section">
+      <div class="section-container">
+        <div class="section-header" data-reveal="up">
+          <span class="section-tag">// WHO AM I</span>
+          <h2 class="section-title">About <span class="gradient-text">Me</span></h2>
         </div>
-      </li>
-    </ul>
-  </section>
-</article>
+        <div class="about-grid">
+          <div class="about-content" data-reveal="left">
+            <div class="about-text-block">
+              <p>I'm a <strong>Full-Stack Developer</strong> and <strong>UI/UX Designer</strong> from
+                Madurai, Tamil Nadu, India. Currently pursuing B.Tech in Software Product Engineering
+                at <strong>Lovely Professional University</strong>.</p>
+              <p>I build MERN stack applications that blend intuitive design with strong backend
+                architecture. I enjoy turning real-world problems into simple, effective solutions —
+                whether through smooth interfaces, scalable systems, or smart AI integrations.</p>
+              <p>My mission is to turn ideas into visually engaging, high-quality digital experiences
+                that people truly enjoy using.</p>
+            </div>
+            <div class="about-info-grid">
+              <div class="info-card" data-reveal="up" data-delay="100">
+                <ion-icon name="person-outline"></ion-icon>
+                <div>
+                  <span class="info-label">Name</span>
+                  <span class="info-value">Hrithik Vasanthram</span>
+                </div>
+              </div>
+              <div class="info-card" data-reveal="up" data-delay="200">
+                <ion-icon name="mail-outline"></ion-icon>
+                <div>
+                  <span class="info-label">Email</span>
+                  <a href="mailto:hrithikvasanthram@gmail.com"
+                    class="info-value info-link">hrithikvasanthram@gmail.com</a>
+                </div>
+              </div>
+              <div class="info-card" data-reveal="up" data-delay="300">
+                <ion-icon name="location-outline"></ion-icon>
+                <div>
+                  <span class="info-label">Location</span>
+                  <span class="info-value">Madurai, Tamil Nadu, India</span>
+                </div>
+              </div>
+              <div class="info-card" data-reveal="up" data-delay="400">
+                <ion-icon name="school-outline"></ion-icon>
+                <div>
+                  <span class="info-label">Education</span>
+                  <span class="info-value">B.Tech — LPU (2024-2028)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="about-services" data-reveal="right">
+            <h3 class="services-heading">What I Do</h3>
+            <div class="services-grid">
+              <div class="service-card" data-tilt>
+                <div class="service-card-inner">
+                  <div class="service-icon">
+                    <img src="./assets/images/icon-design.svg" alt="Design" width="48">
+                  </div>
+                  <h4>Web Design</h4>
+                  <p>Modern, pixel-perfect designs with meticulous attention to user experience and visual hierarchy.
+                  </p>
+                </div>
+              </div>
+              <div class="service-card" data-tilt>
+                <div class="service-card-inner">
+                  <div class="service-icon">
+                    <img src="./assets/images/icon-dev.svg" alt="Development" width="48">
+                  </div>
+                  <h4>Web Development</h4>
+                  <p>Full-stack development with React, Node.js, Express, and MongoDB. Clean, scalable code.</p>
+                </div>
+              </div>
+              <div class="service-card" data-tilt>
+                <div class="service-card-inner">
+                  <div class="service-icon">
+                    <img src="./assets/images/icon-app.svg" alt="App" width="48">
+                  </div>
+                  <h4>Mobile Apps</h4>
+                  <p>Cross-platform mobile applications with React Native and modern native tooling.</p>
+                </div>
+              </div>
+              <div class="service-card" data-tilt>
+                <div class="service-card-inner">
+                  <div class="service-icon">
+                    <img src="./assets/images/icon-photo.svg" alt="AI" width="48">
+                  </div>
+                  <h4>AI Integration</h4>
+                  <p>Smart AI-powered features using modern ML APIs and intelligent automation systems.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<article class="resume" data-page="resume">
-  <header>
-    <h2 class="h2 article-title">Resume</h2>
-    <br>
-    <a href="./assets/HrithikVasanthram(final).docx.pdf" class="btn download-btn" download>Download Resume</a>
-  </header>
-  <br>
-  <section class="timeline">
-    <div class="title-wrapper">
-      <div class="icon-box"><ion-icon name="book-outline"></ion-icon></div>
-      <h3 class="h3">Education</h3>
+    <!-- ═══════════ SKILLS SECTION ═══════════ -->
+    <section id="skills" class="section skills-section">
+      <div class="section-container">
+        <div class="section-header" data-reveal="up">
+          <span class="section-tag">// EXPERTISE</span>
+          <h2 class="section-title">Skills & <span class="gradient-text">Technologies</span></h2>
+        </div>
+        <div class="skills-showcase">
+          <div class="skills-orbit" data-reveal="scale">
+            <div class="orbit-center">
+              <span class="orbit-label">Tech Stack</span>
+            </div>
+            <div class="orbit-ring orbit-ring-1">
+              <div class="orbit-item" style="--i:0; --total:4" data-tooltip="React">
+                <ion-icon name="logo-react"></ion-icon>
+              </div>
+              <div class="orbit-item" style="--i:1; --total:4" data-tooltip="Node.js">
+                <ion-icon name="logo-nodejs"></ion-icon>
+              </div>
+              <div class="orbit-item" style="--i:2; --total:4" data-tooltip="JavaScript">
+                <ion-icon name="logo-javascript"></ion-icon>
+              </div>
+              <div class="orbit-item" style="--i:3; --total:4" data-tooltip="Python">
+                <ion-icon name="logo-python"></ion-icon>
+              </div>
+            </div>
+            <div class="orbit-ring orbit-ring-2">
+              <div class="orbit-item" style="--i:0; --total:6" data-tooltip="HTML5">
+                <ion-icon name="logo-html5"></ion-icon>
+              </div>
+              <div class="orbit-item" style="--i:1; --total:6" data-tooltip="CSS3">
+                <ion-icon name="logo-css3"></ion-icon>
+              </div>
+              <div class="orbit-item" style="--i:2; --total:6" data-tooltip="Firebase">
+                <ion-icon name="logo-firebase"></ion-icon>
+              </div>
+              <div class="orbit-item" style="--i:3; --total:6" data-tooltip="GitHub">
+                <ion-icon name="logo-github"></ion-icon>
+              </div>
+              <div class="orbit-item" style="--i:4; --total:6" data-tooltip="Docker">
+                <ion-icon name="logo-docker"></ion-icon>
+              </div>
+              <div class="orbit-item" style="--i:5; --total:6" data-tooltip="npm">
+                <ion-icon name="logo-npm"></ion-icon>
+              </div>
+            </div>
+          </div>
+          <div class="skills-bars" data-reveal="right">
+            <div class="skill-bar-item" data-reveal="up" data-delay="0">
+              <div class="skill-bar-header">
+                <span class="skill-bar-name">Frontend (React, HTML/CSS, JS)</span>
+                <span class="skill-bar-percent">90%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" data-width="90"></div>
+              </div>
+            </div>
+            <div class="skill-bar-item" data-reveal="up" data-delay="100">
+              <div class="skill-bar-header">
+                <span class="skill-bar-name">Backend (Node.js, Express)</span>
+                <span class="skill-bar-percent">85%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" data-width="85"></div>
+              </div>
+            </div>
+            <div class="skill-bar-item" data-reveal="up" data-delay="200">
+              <div class="skill-bar-header">
+                <span class="skill-bar-name">Database (MongoDB, SQL)</span>
+                <span class="skill-bar-percent">80%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" data-width="80"></div>
+              </div>
+            </div>
+            <div class="skill-bar-item" data-reveal="up" data-delay="300">
+              <div class="skill-bar-header">
+                <span class="skill-bar-name">UI/UX Design</span>
+                <span class="skill-bar-percent">85%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" data-width="85"></div>
+              </div>
+            </div>
+            <div class="skill-bar-item" data-reveal="up" data-delay="400">
+              <div class="skill-bar-header">
+                <span class="skill-bar-name">DevOps (Docker, CI/CD)</span>
+                <span class="skill-bar-percent">70%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" data-width="70"></div>
+              </div>
+            </div>
+            <div class="skill-bar-item" data-reveal="up" data-delay="500">
+              <div class="skill-bar-header">
+                <span class="skill-bar-name">Python & AI/ML</span>
+                <span class="skill-bar-percent">75%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" data-width="75"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ PROJECTS SECTION ═══════════ -->
+    <section id="projects" class="section projects-section">
+      <div class="section-container">
+        <div class="section-header" data-reveal="up">
+          <span class="section-tag">// PORTFOLIO</span>
+          <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+        </div>
+        <div class="projects-grid">
+          <article class="project-card project-card-featured" data-reveal="up" data-tilt>
+            <div class="project-card-image">
+              <img src="./assets/images/hopePlates.jpg" alt="HopePlates" loading="lazy">
+              <div class="project-card-overlay">
+                <a href="https://s65-hrithik-capstone-hopeplates-1.onrender.com/" target="_blank"
+                  class="project-link-btn">
+                  <ion-icon name="open-outline"></ion-icon>
+                  <span>Live Demo</span>
+                </a>
+              </div>
+            </div>
+            <div class="project-card-content">
+              <div class="project-tags">
+                <span class="tag">MERN Stack</span>
+                <span class="tag">Full-Stack</span>
+                <span class="tag">Social Impact</span>
+              </div>
+              <h3 class="project-card-title">HopePlates</h3>
+              <p class="project-card-desc">A full-stack web application dedicated to reducing food waste by connecting
+                donors with those in need. Built with the MERN stack featuring real-time updates and geolocation
+                services.</p>
+              <div class="project-card-footer">
+                <div class="project-tech-stack">
+                  <ion-icon name="logo-react"></ion-icon>
+                  <ion-icon name="logo-nodejs"></ion-icon>
+                  <ion-icon name="server-outline"></ion-icon>
+                </div>
+                <a href="https://s65-hrithik-capstone-hopeplates-1.onrender.com/" target="_blank" class="project-arrow">
+                  <ion-icon name="arrow-forward-outline"></ion-icon>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card project-card-featured" data-reveal="up" data-delay="200" data-tilt>
+            <div class="project-card-image">
+              <img src="./assets/images/chup-chat.png" alt="Chup Chat" loading="lazy">
+              <div class="project-card-overlay">
+                <a href="https://chupchat-1.onrender.com/" target="_blank" class="project-link-btn">
+                  <ion-icon name="open-outline"></ion-icon>
+                  <span>Live Demo</span>
+                </a>
+              </div>
+            </div>
+            <div class="project-card-content">
+              <div class="project-tags">
+                <span class="tag">Real-Time</span>
+                <span class="tag">Socket.IO</span>
+                <span class="tag">Chat App</span>
+              </div>
+              <h3 class="project-card-title">Chup Chat</h3>
+              <p class="project-card-desc">A real-time messaging application with modern UI, user authentication, and
+                instant message delivery using WebSockets. Features include typing indicators and online status.</p>
+              <div class="project-card-footer">
+                <div class="project-tech-stack">
+                  <ion-icon name="logo-react"></ion-icon>
+                  <ion-icon name="logo-nodejs"></ion-icon>
+                  <ion-icon name="chatbubbles-outline"></ion-icon>
+                </div>
+                <a href="https://chupchat-1.onrender.com/" target="_blank" class="project-arrow">
+                  <ion-icon name="arrow-forward-outline"></ion-icon>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ RESUME SECTION ═══════════ -->
+    <section id="resume" class="section resume-section">
+      <div class="section-container">
+        <div class="section-header" data-reveal="up">
+          <span class="section-tag">// EXPERIENCE</span>
+          <h2 class="section-title">My <span class="gradient-text">Journey</span></h2>
+        </div>
+        <div class="timeline-wrapper">
+          <div class="timeline-line"></div>
+          <div class="timeline-block" data-reveal="left">
+            <div class="timeline-dot">
+              <ion-icon name="school-outline"></ion-icon>
+            </div>
+            <div class="timeline-card" data-tilt>
+              <span class="timeline-date">2024 — 2028</span>
+              <h4 class="timeline-card-title">Bachelor of Computer Science</h4>
+              <p class="timeline-card-subtitle">B.Tech, Software Product Engineering</p>
+              <p class="timeline-card-desc">Lovely Professional University, Punjab — Focused on software engineering,
+                data structures, algorithms, and modern web technologies.</p>
+            </div>
+          </div>
+          <div class="timeline-block" data-reveal="right">
+            <div class="timeline-dot">
+              <ion-icon name="code-slash-outline"></ion-icon>
+            </div>
+            <div class="timeline-card" data-tilt>
+              <span class="timeline-date">2024 — Present</span>
+              <h4 class="timeline-card-title">Full-Stack Development</h4>
+              <p class="timeline-card-subtitle">Self-Taught & Project-Based</p>
+              <p class="timeline-card-desc">Built multiple production-ready applications including HopePlates and Chup
+                Chat. Proficient in MERN stack, REST APIs, WebSocket, and cloud deployments.</p>
+            </div>
+          </div>
+          <div class="timeline-block" data-reveal="left">
+            <div class="timeline-dot">
+              <ion-icon name="rocket-outline"></ion-icon>
+            </div>
+            <div class="timeline-card" data-tilt>
+              <span class="timeline-date">Ongoing</span>
+              <h4 class="timeline-card-title">Open Source & Learning</h4>
+              <p class="timeline-card-subtitle">Continuous Growth</p>
+              <p class="timeline-card-desc">Actively contributing to open-source, solving DSA problems on LeetCode, and
+                exploring DevOps, Docker containerization, and AI/ML integrations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ CONTACT SECTION ═══════════ -->
+    <section id="contact" class="section contact-section">
+      <div class="section-container">
+        <div class="section-header" data-reveal="up">
+          <span class="section-tag">// GET IN TOUCH</span>
+          <h2 class="section-title">Let's <span class="gradient-text">Connect</span></h2>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-info-panel" data-reveal="left">
+            <h3 class="contact-heading">Let's create something amazing together.</h3>
+            <p class="contact-subtext">Feel free to reach out for collaborations, opportunities, or just a friendly
+              chat. I'm always excited to discuss new ideas.</p>
+            <div class="contact-cards">
+              <a href="mailto:hrithikvasanthram@gmail.com" class="contact-card" data-tilt>
+                <div class="contact-card-icon">
+                  <ion-icon name="mail-outline"></ion-icon>
+                </div>
+                <div>
+                  <span class="contact-card-label">Email</span>
+                  <span class="contact-card-value">hrithikvasanthram@gmail.com</span>
+                </div>
+              </a>
+              <a href="https://linkedin.com/in/hrithik18k" target="_blank" class="contact-card" data-tilt>
+                <div class="contact-card-icon">
+                  <ion-icon name="logo-linkedin"></ion-icon>
+                </div>
+                <div>
+                  <span class="contact-card-label">LinkedIn</span>
+                  <span class="contact-card-value">linkedin.com/in/hrithik18k</span>
+                </div>
+              </a>
+              <a href="https://github.com/hrithik18k" target="_blank" class="contact-card" data-tilt>
+                <div class="contact-card-icon">
+                  <ion-icon name="logo-github"></ion-icon>
+                </div>
+                <div>
+                  <span class="contact-card-label">GitHub</span>
+                  <span class="contact-card-value">github.com/hrithik18k</span>
+                </div>
+              </a>
+              <a href="https://leetcode.com/hrithik18k" target="_blank" class="contact-card" data-tilt>
+                <div class="contact-card-icon">
+                  <img src="./assets/images/logo-leetcode.webp" alt="LeetCode" class="contact-leetcode-icon">
+                </div>
+                <div>
+                  <span class="contact-card-label">LeetCode</span>
+                  <span class="contact-card-value">leetcode.com/hrithik18k</span>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="contact-form-panel" data-reveal="right">
+            <form class="contact-form" id="contactForm" action="https://formspree.io/f/placeholder" method="POST">
+              <div class="form-group">
+                <label for="name" class="form-label">Your Name</label>
+                <input type="text" id="name" name="name" class="form-input" placeholder="John Doe" required
+                  autocomplete="name">
+                <div class="input-line"></div>
+              </div>
+              <div class="form-group">
+                <label for="email" class="form-label">Your Email</label>
+                <input type="email" id="email" name="email" class="form-input" placeholder="john@example.com" required
+                  autocomplete="email">
+                <div class="input-line"></div>
+              </div>
+              <div class="form-group">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" id="subject" name="subject" class="form-input" placeholder="Project Collaboration"
+                  required>
+                <div class="input-line"></div>
+              </div>
+              <div class="form-group">
+                <label for="message" class="form-label">Message</label>
+                <textarea id="message" name="message" class="form-input form-textarea"
+                  placeholder="Tell me about your project..." required></textarea>
+                <div class="input-line"></div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-submit" id="submitBtn">
+                <span>Send Message</span>
+                <ion-icon name="paper-plane-outline"></ion-icon>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <img src="./assets/images/Hrithik-Logo.png" alt="H" class="footer-logo">
+        <span>Hrithik Vasanthram</span>
+      </div>
+      <div class="footer-social">
+        <a href="https://github.com/hrithik18k" target="_blank" aria-label="GitHub"><ion-icon
+            name="logo-github"></ion-icon></a>
+        <a href="https://linkedin.com/in/hrithik18k" target="_blank" aria-label="LinkedIn"><ion-icon
+            name="logo-linkedin"></ion-icon></a>
+        <a href="mailto:hrithikvasanthram@gmail.com" aria-label="Email"><ion-icon name="mail-outline"></ion-icon></a>
+      </div>
+      <p class="footer-copy">&copy; 2026 Hrithik Vasanthram. Crafted with passion & code.</p>
     </div>
+  </footer>
 
-    <ol class="timeline-list">
-      <li class="timeline-item">
-        <h4 class="h4 timeline-item-title">Bachelor of Computer Science</h4>
-        <span>2024 — 2028</span>
-        <p class="timeline-text">B.Tech, Software Product Engineering — Lovely Professional University, Punjab.</p>
-      </li>
-    </ol>
-  </section>
+  <!-- ═══════════ BACK TO TOP ═══════════ -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <ion-icon name="chevron-up-outline"></ion-icon>
+  </button>
 
-  <section class="skill">
-    <h3 class="h3 skills-title">My skills</h3>
-    <ul class="skills-list content-card">
-      <li class="skills-item">
-        <div class="title-wrapper"><h5 class="h5">Web Design</h5><data value="90">90%</data></div>
-        <div class="skill-progress-bg"><div class="skill-progress-fill" style="width:90%"></div></div>
-      </li>
-      <li class="skills-item">
-        <div class="title-wrapper"><h5 class="h5">React & Node.js</h5><data value="85">85%</data></div>
-        <div class="skill-progress-bg"><div class="skill-progress-fill" style="width:85%"></div></div>
-      </li>
-      <li class="skills-item">
-        <div class="title-wrapper"><h5 class="h5">UI/UX Design</h5><data value="80">80%</data></div>
-        <div class="skill-progress-bg"><div class="skill-progress-fill" style="width:80%"></div></div>
-      </li>
-      <li class="skills-item">
-        <div class="title-wrapper"><h5 class="h5">MongoDB & Database</h5><data value="75">75%</data></div>
-        <div class="skill-progress-bg"><div class="skill-progress-fill" style="width:75%"></div></div>
-      </li>
-    </ul>
-  </section>
-</article>
-
-<article class="portfolio" data-page="portfolio">
-  <header><h2 class="h2 article-title">Projects</h2></header>
-
-  <section class="projects">
-    <ul class="project-list">
-      <li class="project-item active">
-        <a href="https://s65-hrithik-capstone-hopeplates-1.onrender.com/">
-          <figure class="project-img">
-            <div class="project-item-icon-box"><ion-icon name="eye-outline"></ion-icon></div>
-            <img src="./assets/images/hopePlates.jpg" alt="HopePlates" loading="lazy">
-          </figure>
-          <h3 class="project-title">HopePlates</h3>
-          <p class="project-category">Web Application</p>
-        </a>
-      </li>
-
-      <li class="project-item active">
-        <a href="https://chupchat-1.onrender.com/">
-          <figure class="project-img">
-            <div class="project-item-icon-box"><ion-icon name="eye-outline"></ion-icon></div>
-            <img src="./assets/images/chup-chat.jpg" alt="Chup Chat" loading="lazy">
-          </figure>
-          <h3 class="project-title">Chup Chat</h3>
-          <p class="project-category">Web Application</p>
-        </a>
-      </li>
-    </ul>
-  </section>
-</article>
-
-<article class="contact" data-page="contact">
-  <header><h2 class="h2 article-title">Contact</h2></header>
-
-  <section class="contact-connect">
-    <h3 class="h3 contact-connect-title">Connect with me</h3>
-
-    <ul class="contacts-list contact-connect-list">
-      <li class="contact-item">
-        <div class="icon-box"><ion-icon name="mail-outline"></ion-icon></div>
-        <div class="contact-info">
-          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=hrithikvasanthram@gmail.com" class="contact-link">hrithikvasanthram@gmail.com</a>
-        </div>
-      </li>
-
-      <li class="contact-item">
-        <div class="icon-box"><ion-icon name="logo-linkedin"></ion-icon></div>
-        <div class="contact-info">
-          <p class="contact-title">LinkedIn</p>
-          <a href="https://linkedin.com/in/hrithik18k" target="_blank" class="contact-link">linkedin.com/in/hrithik18k</a>
-        </div>
-      </li>
-
-      <li class="contact-item">
-        <div class="icon-box"><ion-icon name="logo-github"></ion-icon></div>
-        <div class="contact-info">
-          <p class="contact-title">GitHub</p>
-          <a href="https://github.com/hrithik18k" target="_blank" class="contact-link">github.com/hrithik18k</a>
-        </div>
-      </li>
-    </ul>
-
-    <div class="separator"></div>
-
-    <ul class="social-list contact-social-list">
-      <li class="social-item">
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=hrithikvasanthram@gmail.com" class="social-link">
-          <ion-icon name="mail-outline"></ion-icon>
-        </a>
-      </li>
-
-      <li class="social-item">
-        <a href="https://linkedin.com/in/hrithik18k" target="_blank" class="social-link">
-          <ion-icon name="logo-linkedin"></ion-icon>
-        </a>
-      </li>
-
-      <li class="social-item">
-        <a href="https://github.com/hrithik18k" target="_blank" class="social-link">
-          <ion-icon name="logo-github"></ion-icon>
-        </a>
-      </li>
-    </ul>
-  </section>
-</article>
-
-</div>
-</main>
-
-<script src="./assets/js/script.js"></script>
+  <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
