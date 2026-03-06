@@ -1,0 +1,29 @@
+# Dependencies & Build artifacts
+node_modules/
+.git/
+.gitignore
+
+# Docker-specific
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentation
+README.md
+LICENSE
+*.md
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Monitoring (not needed in app image)
+monitoring/
+
+# Logs
+*.log

@@ -1,0 +1,183 @@
+# ╔══════════════════════════════════════════════════════════════╗
+# ║  Docker Compose — Portfolio with Load Balancing             ║
+# ║  3 Replicas · Nginx LB · Health Checks · Monitoring        ║
+# ╚══════════════════════════════════════════════════════════════╝
+
+version: '3.9'
+
+services:
+  # ═══════════════════════════════════════════════
+  # LOAD BALANCER (Entry Point)
+  # ═══════════════════════════════════════════════
+  load-balancer:
+    image: nginx:1.27-alpine
+    container_name: portfolio-lb
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/lb.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      portfolio-1:
+        condition: service_healthy
+      portfolio-2:
+        condition: service_healthy
+      portfolio-3:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - portfolio-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 128M
+        reservations:
+          cpus: '0.25'
+          memory: 64M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/lb-health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    labels:
+      - "com.portfolio.role=load-balancer"
+      - "com.portfolio.version=2.0"
+
+  # ═══════════════════════════════════════════════
+  # APPLICATION REPLICAS
+  # ═══════════════════════════════════════════════
+  portfolio-1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: portfolio-app-1
+    restart: unless-stopped
+    networks:
+      - portfolio-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 64M
+        reservations:
+          cpus: '0.10'
+          memory: 32M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    labels:
+      - "com.portfolio.role=app-server"
+      - "com.portfolio.replica=1"
+
+  portfolio-2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: portfolio-app-2
+    restart: unless-stopped
+    networks:
+      - portfolio-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 64M
+        reservations:
+          cpus: '0.10'
+          memory: 32M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    labels:
+      - "com.portfolio.role=app-server"
+      - "com.portfolio.replica=2"
+
+  portfolio-3:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: portfolio-app-3
+    restart: unless-stopped
+    networks:
+      - portfolio-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 64M
+        reservations:
+          cpus: '0.10'
+          memory: 32M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    labels:
+      - "com.portfolio.role=app-server"
+      - "com.portfolio.replica=3"
+
+  # ═══════════════════════════════════════════════
+  # MONITORING (Optional — Prometheus metrics)
+  # ═══════════════════════════════════════════════
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: portfolio-prometheus
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - portfolio-network
+    restart: unless-stopped
+    profiles:
+      - monitoring
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 128M
+
+  # ═══════════════════════════════════════════════
+  # NGINX EXPORTER (Metrics for Prometheus)
+  # ═══════════════════════════════════════════════
+  nginx-exporter:
+    image: nginx/nginx-prometheus-exporter:latest
+    container_name: portfolio-nginx-exporter
+    command:
+      - '-nginx.scrape-uri=http://load-balancer:80/lb-status'
+    depends_on:
+      - load-balancer
+    ports:
+      - "9113:9113"
+    networks:
+      - portfolio-network
+    restart: unless-stopped
+    profiles:
+      - monitoring
+    deploy:
+      resources:
+        limits:
+          cpus: '0.10'
+          memory: 32M
+
+networks:
+  portfolio-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  prometheus-data:
+    driver: local
