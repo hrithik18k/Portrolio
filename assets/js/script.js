@@ -659,6 +659,57 @@
 
 
   // ═══════════════════════════════════════════════
+  // §14.5 — EMAIL HANDLER
+  // ═══════════════════════════════════════════════
+
+  const EmailHandler = {
+    toastTimer: null,
+
+    init() {
+      const emailLinks = $$('a[href^="mailto:"]');
+      emailLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          const email = link.getAttribute('href').replace('mailto:', '').split('?')[0];
+
+          // Copy to clipboard
+          if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(email).then(() => {
+              this.showToast(`Email copied to clipboard`);
+            }).catch(err => {
+              console.error('Failed to copy text: ', err);
+            });
+          }
+          
+          // Browser will naturally open the mail client because it's an <a> tag
+          // and we no longer call e.preventDefault()
+        });
+      });
+    },
+
+    showToast(message) {
+      let toast = $('.toast-notification');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.className = 'toast-notification';
+        document.body.appendChild(toast);
+      }
+
+      toast.innerHTML = `<ion-icon name="checkmark-circle-outline"></ion-icon> <span>${message}</span>`;
+
+      // Reset animation
+      toast.classList.remove('show');
+      void toast.offsetWidth; // trigger reflow
+      toast.classList.add('show');
+
+      clearTimeout(this.toastTimer);
+      this.toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+  };
+
+
+  // ═══════════════════════════════════════════════
   // §15 — SMOOTH SECTION TRANSITIONS
   // ═══════════════════════════════════════════════
 
@@ -719,6 +770,7 @@
     TiltEffect.init();
     BackToTop.init();
     ContactForm.init();
+    EmailHandler.init();
     SectionTransitions.init();
     Performance.init();
 

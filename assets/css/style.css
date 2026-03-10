@@ -1959,70 +1959,86 @@ textarea {
   color: var(--text-primary);
 }
 
-/* Contact Form */
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.form-group {
-  position: relative;
-}
-
-.form-label {
-  display: block;
-  font-size: var(--fs-xs);
-  font-weight: var(--fw-medium);
-  color: var(--text-muted);
-  margin-bottom: 8px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.contact-form .form-input {
-  width: 100%;
-  padding: 14px 18px;
+/* Contact Alternative Panel */
+.contact-alternative {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  color: var(--text-primary);
-  font-size: var(--fs-body);
-  transition: all var(--transition-fast);
+  border-radius: var(--radius-xl);
+  padding: 40px 30px;
+  text-align: center;
   backdrop-filter: blur(10px);
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 
-.contact-form .form-input::placeholder {
-  color: var(--text-muted);
-}
-
-.contact-form .form-input:focus {
+.contact-alternative:hover {
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.1);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-glow);
 }
 
-.form-textarea {
-  min-height: 140px;
-  resize: vertical;
+.alt-icon-wrapper {
+  width: 70px;
+  height: 70px;
+  background: rgba(108, 99, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: var(--accent-primary);
+  margin-bottom: 8px;
+  transition: all var(--transition-base);
 }
 
-.input-line {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--accent-gradient);
-  border-radius: 2px;
-  transition: width var(--transition-base);
+.contact-alternative:hover .alt-icon-wrapper {
+  background: var(--accent-primary);
+  color: white;
+  transform: scale(1.1) rotate(10deg);
 }
 
-.form-input:focus~.input-line {
-  width: 100%;
+.alt-heading {
+  font-family: var(--ff-heading);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  color: var(--text-primary);
 }
 
-.btn-submit {
-  align-self: flex-start;
+.alt-desc {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: var(--fs-small);
+  max-width: 360px;
+  margin-bottom: 8px;
+}
+
+.alt-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px;
+  background: rgba(0, 230, 118, 0.1);
+  border: 1px solid rgba(0, 230, 118, 0.2);
+  border-radius: 50px;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--success);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.alt-btn {
+  margin-top: 8px;
 }
 
 
@@ -2353,6 +2369,46 @@ textarea {
   .skill-bar-fill {
     transition: none;
   }
+}
+
+/* ═══════════════════════════════════════════════
+   §20 — TOAST NOTIFICATION
+   ═══════════════════════════════════════════════ */
+
+.toast-notification {
+  position: fixed;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--accent-primary);
+  border-radius: 50px;
+  padding: 12px 24px;
+  color: var(--text-primary);
+  font-size: var(--fs-small);
+  font-family: var(--ff-body);
+  font-weight: var(--fw-medium);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 99999;
+  box-shadow: 0 10px 30px rgba(108, 99, 255, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s var(--ease-out-expo);
+}
+
+.toast-notification.show {
+  bottom: 40px;
+  opacity: 1;
+  visibility: visible;
+}
+
+.toast-notification ion-icon {
+  color: var(--success);
+  font-size: 20px;
 }
 
 /* Print styles */
